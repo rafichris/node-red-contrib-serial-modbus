@@ -88,11 +88,19 @@ module.exports = function(RED) {
             node.client.setID(obj.id);
             promise =  node.client.readHoldingRegisters(obj.offset, obj.length);
           break;
+          case 'writeCoil':
+            node.client.setID(obj.id);
+            promise = node.client.writeCoil(obj.offset, obj.data);
+          break;
+          case 'writeRegister':
+            node.client.setID(obj.id);
+            promise = node.client.writeRegister(obj.offset, obj.data);            
+          break;          
           case 'writeCoils':
             node.client.setID(obj.id);
             promise = node.client.writeCoils(obj.offset, obj.data);
           break;
-          case 'writeInputRegisters':
+          case 'writeRegisters':
             node.client.setID(obj.id);
             promise = node.client.writeRegisters(obj.offset, obj.data);            
           break;
@@ -179,6 +187,19 @@ module.exports = function(RED) {
       }
     };
 
+    this.writeCoil = function (id,offset,data) {
+      var obj = {
+        id: id,
+        type: 'writeCoil',
+        data: data,
+        offset: offset
+      };
+      node.requests.push(obj);
+      if (!node.processing) {
+        processList();
+      }
+    };    
+
     this.writeCoils = function(id,offset,data) {
       var obj = {
         id: id,
@@ -190,18 +211,12 @@ module.exports = function(RED) {
       if (!node.processing) {
         processList();
       }
-      //node.client.setID(id);
-      //node.client.writeCoils(offset, data);
     };
 
-    this.writeDiscreteInputs = function (id,offset,data) {
-      this.writeCoils(id,offset,data);
-    };
-
-    this.writeInputRegisters = function(id,offset,data) {
+    this.writeRegister = function(id,offset,data) {
       var obj = {
         id: id,
-        type: 'writeInputRegisters',
+        type: 'writeRegister',
         data: data,
         offset: offset
       };
@@ -209,12 +224,19 @@ module.exports = function(RED) {
       if (!node.processing) {
         processList();
       }
-      // node.client.setID(id);
-      // node.client.writeRegisters(offset,data);
     };
 
-    this.writeHoldingRegisters = function(id,offset,data) {
-      this.writeInputRegisters(id,offset,data);
+    this.writeRegisters = function(id,offset,data) {
+      var obj = {
+        id: id,
+        type: 'writeRegisters',
+        data: data,
+        offset: offset
+      };
+      node.requests.push(obj);
+      if (!node.processing) {
+        processList();
+      }
     };
 
     this.on('close',function(done){
@@ -348,14 +370,14 @@ module.exports = function(RED) {
       console.log(node.dtype);
 
       //if (util.isBuffer(msg.payload)){
-        if (node.dtype === 'discrete') {
-          node.connection.writeDiscreteInputs(slave, node.start, msg.payload);
-        } else if (node.dtype === 'coil') {
+        if (node.dtype === 'coil') {
+          node.connection.writeCoil(slave, node.start, msg.payload);
+        } else if (node.dtype === 'coils') {
           node.connection.writeCoils(slave, node.start, msg.payload);
-        } else if (node.dtype === 'input') {
-          node.connection.writeInputRegisters(slave, node.start, msg.payload);
-        } else if (node.dtype === 'holding') {
-          node.connection.writeHoldingRegisters(slave, node.start, msg.payload);
+        } else if (node.dtype === 'register') {
+          node.connection.writeRegister(slave, node.start, msg.payload);
+        } else if (node.dtype === 'registers') {
+          node.connection.writeRegisters(slave, node.start, msg.payload);
         }
       //}
     });
