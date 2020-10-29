@@ -22,9 +22,9 @@
     "url": "https://github.com/rafichris/node-red-contrib-serial-modbus/issues"
   },
   "dependencies": {
-    "bluebird": "^3.7.2",
-    "modbus-serial": "^7.7.4",
-    "serialport": "^7.1.6"
+    "bluebird": "^3.7.1",
+    "modbus-serial": "^7.7.3",
+    "serialport": "^7.1.5"
   },
   "node-red": {
     "nodes": {
