@@ -1,5 +1,5 @@
 {
-  "name": "node-red-contrib-serial-modbus",
+  "name": "node-red-contrib-serial-modbus2",
   "version": "0.0.12",
   "description": "Node to read values from a Modbus slave via RS485",
   "scripts": {
@@ -16,10 +16,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafichris/node-red-contrib-serial-modbus"
+    "url": "https://github.com/rafichris/node-red-contrib-serial-modbus2"
   },
   "bugs": {
-    "url": "https://github.com/rafichris/node-red-contrib-serial-modbus/issues"
+    "url": "https://github.com/rafichris/node-red-contrib-serial-modbus2/issues"
   },
   "dependencies": {
     "bluebird": "^3.7.1",
