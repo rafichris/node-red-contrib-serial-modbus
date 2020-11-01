@@ -1,4 +1,4 @@
-# node-red-contrib-serial-modbus2
+# node-red-contrib-serial-modbus
 
 A node to read data via Modbus over RS485 serial.
 
@@ -8,7 +8,7 @@ If value is bigger than one register/coil it will continue to the next one
 
 ## Install
 
-npm install node-red-contrib-serial-modbus2
+npm install node-red-contrib-serial-modbus
 
 ## Usage
 
