@@ -19,7 +19,7 @@
     "url": "https://github.com/rafichris/node-red-contrib-serial-modbus"
   },
   "bugs": {
-    "url": "https://github.com/rafichris/node-red-contrib-serial-modbus2/issues"
+    "url": "https://github.com/rafichris/node-red-contrib-serial-modbus/issues"
   },
   "dependencies": {
     "bluebird": "^3.7.1",
